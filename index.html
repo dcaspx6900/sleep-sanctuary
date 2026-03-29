@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sleep Sanctuary — guided wind-down with ambient soundscapes. Try the beta." />
+  <meta property="og:title" content="Sleep Sanctuary" />
+  <meta property="og:description" content="Deep rest protocol — ambient layers and guided calm." />
+  <meta name="theme-color" content="#0a0b0a" />
+  <title>Sleep Sanctuary</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#fff7f4",
+            "primary-fixed": "#cee9dd",
+            "on-secondary-fixed-variant": "#3f5f75",
+            "surface-container-lowest": "#ffffff",
+            "primary-container": "#cee9dd",
+            "on-tertiary-fixed": "#4c2d0a",
+            "inverse-on-surface": "#9e9d99",
+            "secondary-dim": "#37576c",
+            "surface-container-high": "#e9e8e3",
+            "on-secondary-container": "#35556b",
+            "primary-dim": "#40584f",
+            "surface-tint": "#4c645b",
+            "tertiary-fixed": "#fac898",
+            "primary": "#4c645b",
+            "error-container": "#fa746f",
+            "surface-container": "#efeee9",
+            "on-primary-container": "#3f574e",
+            "on-background": "#31332f",
+            "error-dim": "#67040d",
+            "on-primary-fixed-variant": "#496058",
+            "on-primary-fixed": "#2d443c",
+            "surface-variant": "#e3e3dc",
+            "surface-bright": "#fbf9f5",
+            "on-surface-variant": "#5e605b",
+            "background": "#fbf9f5",
+            "surface-container-highest": "#e3e3dc",
+            "surface-container-low": "#f5f4ef",
+            "on-secondary-fixed": "#224358",
+            "inverse-primary": "#dffaee",
+            "primary-fixed-dim": "#c0dacf",
+            "tertiary": "#7d5731",
+            "on-surface": "#31332f",
+            "secondary-container": "#c8e6ff",
+            "on-error": "#fff7f6",
+            "secondary-fixed-dim": "#b8d9f3",
+            "outline-variant": "#b2b2ad",
+            "tertiary-fixed-dim": "#ebbb8c",
+            "surface": "#fbf9f5",
+            "outline": "#7a7b76",
+            "on-tertiary-fixed-variant": "#6c4924",
+            "surface-dim": "#dadad4",
+            "tertiary-dim": "#6f4c26",
+            "on-error-container": "#6e0a12",
+            "on-primary": "#e4fff3",
+            "error": "#a83836",
+            "tertiary-container": "#fac898",
+            "inverse-surface": "#0e0e0d",
+            "secondary": "#436379",
+            "secondary-fixed": "#c8e6ff",
+            "on-secondary": "#f5f9ff",
+            "on-tertiary-container": "#62401c"
+          },
+          fontFamily: {
+            headline: ["Manrope", "system-ui", "sans-serif"],
+            body: ["Inter", "system-ui", "sans-serif"],
+            label: ["Inter", "system-ui", "sans-serif"]
+          },
+          borderRadius: { DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" }
+        }
+      }
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    }
+    .material-symbols-filled {
+      font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    .slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+    }
+    .slider-thumb::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #40584f, #4c645b);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      margin-top: -5px;
+    }
+    .slider-thumb::-moz-range-thumb {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #40584f, #4c645b);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+    }
+    .slider-thumb::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .slider-thumb::-moz-range-track {
+      height: 6px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-[#0a0b0a] text-on-surface-variant font-body antialiased selection:bg-primary/30">
+  <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-[60] max-w-sm px-4 py-3 rounded-xl bg-error/90 text-on-error text-sm font-medium shadow-lg opacity-0 pointer-events-none transition-opacity duration-300" role="status"></div>
+
+  <main class="relative min-h-screen flex flex-col items-center justify-between px-6 py-12 overflow-hidden">
+    <header class="w-full max-w-lg flex items-center justify-between z-10">
+      <button type="button" id="btn-close" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 text-on-surface-variant hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/50" aria-label="Leave session">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      <div class="text-center">
+        <p class="font-headline font-bold text-lg tracking-tight text-on-surface-variant/80">Sleep Sanctuary</p>
+        <p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/40 mt-1">Deep Rest Protocol</p>
+      </div>
+      <button type="button" id="btn-menu" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 text-on-surface-variant hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/50" aria-label="Session settings" aria-haspopup="dialog" aria-expanded="false" aria-controls="settings-panel">
+        <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
+      </button>
+    </header>
+
+    <p id="status-announcer" class="sr-only" aria-live="polite"></p>
+
+    <section class="relative flex flex-col items-center justify-center flex-grow w-full" aria-labelledby="session-title">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_38%,rgba(55,87,108,0.14),transparent)] opacity-40 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative group cursor-default">
+        <div id="celestial-glow" class="absolute -inset-16 bg-primary-dim/10 rounded-full blur-[80px] opacity-40 transition-opacity duration-[4000ms] ease-out" aria-hidden="true"></div>
+        <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-[#1a1c1a] to-[#0a0b0a] border border-white/5 flex items-center justify-center overflow-hidden shadow-[0_0_100px_rgba(76,100,91,0.05)]">
+          <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')] mix-blend-overlay pointer-events-none" aria-hidden="true"></div>
+          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-primary/5 to-secondary/10 pointer-events-none" aria-hidden="true"></div>
+          <div class="relative flex flex-col items-center gap-2">
+            <span id="orb-icon" class="material-symbols-outlined text-primary-fixed-dim/50 text-4xl transition-all duration-500" aria-hidden="true">bedtime</span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 text-center space-y-2 max-w-md px-2">
+        <h1 id="session-title" class="font-headline font-extrabold text-3xl text-on-surface-variant tracking-tight">Midnight Whispers</h1>
+        <p class="font-body text-on-surface-variant/50 text-base">Guided calm · ambient bed</p>
+        <p id="session-sub" class="font-label text-[11px] text-on-surface-variant/35 uppercase tracking-widest">Beta · spoken guide ~12 min · add your own track anytime</p>
+      </div>
+    </section>
+
+    <section class="w-full max-w-lg space-y-10 pb-8 z-10" aria-label="Playback controls">
+      <div id="guided-progress-wrap" class="w-full space-y-2 hidden" aria-hidden="true">
+        <div class="flex justify-between items-center text-on-surface-variant/35 font-label text-[10px] uppercase tracking-tighter tabular-nums px-0.5">
+          <span id="guided-elapsed">0:00</span>
+          <span class="text-on-surface-variant/25">Guided track</span>
+          <span id="guided-duration">—</span>
+        </div>
+        <label for="guided-seek" class="sr-only">Seek guided audio</label>
+        <input id="guided-seek" type="range" min="0" max="1000" value="0" class="slider-thumb w-full h-6" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <button type="button" id="tile-timer" class="bg-white/5 rounded-lg p-5 flex flex-col items-center justify-center space-y-2 border border-white/5 hover:bg-white/[0.07] transition-colors text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/40">
+          <span class="material-symbols-outlined text-primary-fixed-dim/60" aria-hidden="true">timer</span>
+          <span class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant/40">Sleep timer</span>
+          <span id="timer-display" class="font-body font-semibold text-xl text-on-surface-variant font-variant-numeric tabular-nums">30:00</span>
+        </button>
+        <div class="bg-white/5 rounded-lg p-5 flex flex-col items-center justify-center space-y-2 border border-white/5">
+          <span id="ambient-icon" class="material-symbols-outlined text-secondary-fixed-dim/60" aria-hidden="true">water_drop</span>
+          <span class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant/40">Ambient flow</span>
+          <span id="ambient-label" class="font-body font-semibold text-base text-on-surface-variant text-center leading-snug">Rain in Kyoto</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center gap-10">
+        <button type="button" id="btn-back" class="w-14 h-14 flex items-center justify-center rounded-full text-on-surface-variant/40 hover:text-on-surface-variant transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/40" aria-label="Back ten seconds">
+          <span class="material-symbols-outlined text-3xl" aria-hidden="true">replay_10</span>
+        </button>
+        <button type="button" id="btn-play" class="relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/50 rounded-full" aria-label="Play session">
+          <span class="absolute -inset-4 bg-primary/20 blur-2xl rounded-full group-active:scale-90 transition-all duration-500 pointer-events-none" aria-hidden="true"></span>
+          <span class="relative w-24 h-24 flex items-center justify-center rounded-full bg-surface-container-highest/10 backdrop-blur-3xl border border-white/10 text-on-surface-variant active:scale-95 transition-transform duration-[400ms] ease-[cubic-bezier(0.05,0.7,0.1,1.0)]">
+            <span id="play-icon" class="material-symbols-filled text-5xl" aria-hidden="true">play_arrow</span>
+          </span>
+        </button>
+        <button type="button" id="btn-forward" class="w-14 h-14 flex items-center justify-center rounded-full text-on-surface-variant/40 hover:text-on-surface-variant transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/40" aria-label="Forward ten seconds">
+          <span class="material-symbols-outlined text-3xl" aria-hidden="true">forward_10</span>
+        </button>
+      </div>
+
+      <div class="space-y-4 px-1">
+        <div class="flex justify-between items-center text-on-surface-variant/30 font-label text-xs uppercase tracking-tighter">
+          <span>Ambient intensity</span>
+          <span id="intensity-pct" class="tabular-nums">42%</span>
+        </div>
+        <label for="intensity-slider" class="sr-only">Ambient intensity</label>
+        <input id="intensity-slider" type="range" min="0" max="100" value="42" class="slider-thumb w-full h-6" />
+      </div>
+    </section>
+
+    <div class="fixed top-1/4 -right-20 w-80 h-80 bg-secondary/5 blur-[120px] rounded-full pointer-events-none" aria-hidden="true"></div>
+    <div class="fixed bottom-1/4 -left-20 w-96 h-96 bg-primary/5 blur-[140px] rounded-full pointer-events-none" aria-hidden="true"></div>
+  </main>
+
+  <div id="settings-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-200" aria-hidden="true"></div>
+  <div id="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[min(92vw,26rem)] max-h-[85dvh] overflow-y-auto rounded-2xl border border-white/10 bg-[#121413] shadow-2xl scale-95 opacity-0 pointer-events-none transition-all duration-200">
+    <div class="p-6 space-y-6">
+      <div class="flex items-center justify-between gap-4">
+        <h2 id="settings-title" class="font-headline font-bold text-lg text-on-surface-variant">Session</h2>
+        <button type="button" id="btn-settings-close" class="rounded-full p-2 text-on-surface-variant/60 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/40" aria-label="Close settings">
+          <span class="material-symbols-outlined text-xl" aria-hidden="true">close</span>
+        </button>
+      </div>
+
+      <div>
+        <p class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant/40 mb-3">Soundscape</p>
+        <div id="preset-list" class="grid grid-cols-1 gap-2"></div>
+      </div>
+
+      <div class="space-y-3">
+        <p class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant/40">Sleep timer</p>
+        <select id="timer-select" class="w-full rounded-xl bg-white/5 border border-white/10 text-on-surface-variant text-sm py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary/40">
+          <option value="0">Off</option>
+          <option value="15">15 minutes</option>
+          <option value="30" selected>30 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="60">60 minutes</option>
+        </select>
+      </div>
+
+      <div class="space-y-3">
+        <p class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant/40">Guided audio</p>
+        <label class="flex items-center gap-3 cursor-pointer group">
+          <input type="checkbox" id="toggle-speech" class="rounded border-white/20 bg-white/5 text-primary focus:ring-primary/40" checked />
+          <span class="text-sm text-on-surface-variant/80 group-hover:text-on-surface-variant transition-colors">Spoken guidance (beta)</span>
+        </label>
+        <p class="text-xs text-on-surface-variant/45 leading-relaxed">When off, only ambient plays unless you load your own file below.</p>
+        <button type="button" id="btn-pick-audio" class="w-full py-3 px-4 rounded-xl border border-white/10 bg-white/5 text-sm font-medium text-on-surface-variant hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed-dim/40">
+          Load meditation file…
+        </button>
+        <button type="button" id="btn-clear-audio" class="w-full py-2 text-xs text-on-surface-variant/45 hover:text-on-surface-variant/70 hidden">Remove loaded file</button>
+        <p id="guided-file-name" class="text-xs text-primary-fixed-dim/80 truncate hidden pl-1"></p>
+        <label id="guided-loop-wrap" class="hidden flex items-center gap-3 cursor-pointer group mt-2">
+          <input type="checkbox" id="toggle-loop-guided" class="rounded border-white/20 bg-white/5 text-primary focus:ring-primary/40" />
+          <span class="text-sm text-on-surface-variant/80 group-hover:text-on-surface-variant transition-colors">Loop this track</span>
+        </label>
+      </div>
+
+      <p class="text-[10px] text-on-surface-variant/35 leading-relaxed border-t border-white/5 pt-4">
+        Preferences stay on this device (timer, soundscape, intensity). This beta uses synthetic ambience in your browser — no external audio CDN.
+      </p>
+    </div>
+  </div>
+
+  <input type="file" id="guided-file-input" accept="audio/*,.mp3,.m4a,.wav,.ogg,.aac" class="hidden" />
+
+  <script src="js/sanctuary.js" defer></script>
+</body>
+</html>
