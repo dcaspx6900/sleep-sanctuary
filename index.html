@@ -128,6 +128,9 @@
   </style>
 </head>
 <body class="bg-[#0a0b0a] text-on-surface-variant font-body antialiased selection:bg-primary/30">
+  <div id="script-load-error" class="hidden fixed top-0 left-0 right-0 z-[70] bg-error px-4 py-3 text-center text-on-error text-sm font-medium shadow-lg" role="alert">
+    App script missing on server. Upload <strong>sanctuary.js</strong> next to <strong>index.html</strong> in your GitHub repo, then refresh.
+  </div>
   <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-[60] max-w-sm px-4 py-3 rounded-xl bg-error/90 text-on-error text-sm font-medium shadow-lg opacity-0 pointer-events-none transition-opacity duration-300" role="status"></div>
 
   <main class="relative min-h-screen flex flex-col items-center justify-between px-6 py-12 overflow-hidden">
@@ -270,6 +273,6 @@
 
   <input type="file" id="guided-file-input" accept="audio/*,.mp3,.m4a,.wav,.ogg,.aac" class="hidden" />
 
-  <script src="js/sanctuary.js" defer></script>
+  <script src="sanctuary.js" defer onerror="document.getElementById('script-load-error').classList.remove('hidden')"></script>
 </body>
 </html>
